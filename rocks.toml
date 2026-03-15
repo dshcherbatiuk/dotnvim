@@ -11,6 +11,7 @@ neorg = "9.3.0"
 "nvim-web-devicons" = "0.100"
 "lualine.nvim" = "scm"
 "alpha-nvim" = "scm"
+"which-key.nvim" = "scm"
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
