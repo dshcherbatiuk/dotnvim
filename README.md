@@ -1,6 +1,6 @@
 # dotnvim
 
-Personal Neovim configuration inspired by Doom Emacs. Uses [rocks.nvim](https://github.com/nvim-neorocks/rocks.nvim) as plugin manager.
+Personal Neovim IDE configuration. Uses [rocks.nvim](https://github.com/nvim-neorocks/rocks.nvim) as plugin manager.
 
 ## Quick Start
 
@@ -40,7 +40,7 @@ rocks.toml        # Plugin declarations (auto-synced)
 lua/plugins/      # Per-plugin config (auto-loaded by rocks-config.nvim)
 scripts/          # Setup scripts (fonts, etc.)
 docs/             # Migration plan and notes
-Makefile          # CLI entry point (Doom Emacs style)
+Makefile          # CLI entry point
 ```
 
 ## Adding a Plugin

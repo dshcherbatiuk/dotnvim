@@ -1,7 +1,7 @@
--- Lualine statusline — Doom Emacs modeline style
+-- Lualine statusline
 require("lualine").setup({
   options = {
-    theme = "doom-one",
+    theme = "auto",
     component_separators = "",
     section_separators = { left = "", right = "" },
     globalstatus = true,

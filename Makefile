@@ -4,17 +4,17 @@ NVIM_DIR := $(HOME)/.config/nvim
 .PHONY: help setup install pull push sync upgrade doctor fonts clean backup edit
 
 help: ## Show available commands
-	@echo "\033[1mdotnvim\033[0m — Neovim config manager (Doom Emacs style)"
+	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
 	@echo ""
 	@echo "  \033[1mNew machine:\033[0m"
 	@echo "    git clone $(REPO) ~/.config/nvim && cd ~/.config/nvim && make setup"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36mmake %-12s\033[0m %s\n", $$1, $$2}'
 
-setup: fonts sync ## First-time setup on a new machine (doom install)
+setup: fonts sync ## First-time setup on a new machine
 	@echo "✅ Setup complete! Restart your terminal, then open nvim."
 
-pull: ## Pull latest config + sync plugins (doom sync remote)
+pull: ## Pull latest config + sync plugins
 	@echo "⬇️  Pulling latest config..."
 	@git -C $(NVIM_DIR) pull --rebase
 	@echo ""
@@ -29,17 +29,17 @@ push: ## Commit and push config changes
 	@git -C $(NVIM_DIR) push
 	@echo "✅ Config pushed"
 
-sync: ## Sync plugins from rocks.toml (doom sync)
+sync: ## Sync plugins from rocks.toml
 	@echo "🔄 Syncing plugins..."
 	@nvim --headless -c "Rocks sync" -c "sleep 5" -c "qa!" 2>&1 || true
 	@echo "✅ Plugins synced"
 
-upgrade: ## Update all plugins to latest (doom upgrade)
+upgrade: ## Update all plugins to latest
 	@echo "⬆️  Upgrading plugins..."
 	@nvim --headless -c "Rocks update" -c "sleep 10" -c "qa!" 2>&1 || true
 	@echo "✅ Plugins upgraded"
 
-doctor: ## Check health: fonts, LSP servers, plugins (doom doctor)
+doctor: ## Check health: fonts, LSP servers, plugins
 	@echo "🩺 Running diagnostics..."
 	@echo ""
 	@nvim --version | head -1

@@ -5,7 +5,7 @@
 "rocks.nvim" = "2.44.0"
 neorg = "9.3.0"
 "rocks-git.nvim" = "2.5.3"
-telescope = "0.6.0"
+"plenary.nvim" = "scm"
 "neo-tree.nvim" = "3.26"
 "nvim-lspconfig" = {git="neovim/nvim-lspconfig", rev="v1.8.0"}
 "nvim-web-devicons" = "0.100"
@@ -18,6 +18,10 @@ rev = "v0.9.3"
 
 [plugins.doom-one-nvim]
 git = "NTBBloodbath/doom-one.nvim"
+
+[plugins.telescope-nvim]
+git = "nvim-telescope/telescope.nvim"
+rev = "0.1.8"
 
 [config]
 plugins_dir = "plugins/"

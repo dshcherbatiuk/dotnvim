@@ -1,4 +1,4 @@
--- Alpha dashboard — minimal startup screen (Doom removes the logo)
+-- Alpha dashboard — minimal startup screen
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
@@ -21,6 +21,6 @@ dashboard.section.buttons.val = {
   dashboard.button("q", "  Quit", ":qa<CR>"),
 }
 
-dashboard.section.footer.val = "Doom Emacs vibes, Neovim speed"
+dashboard.section.footer.val = ""
 
 alpha.setup(dashboard.config)
