@@ -1,0 +1,18 @@
+[rocks]
+
+[plugins]
+"rocks-config.nvim" = "3.1.0"
+"rocks.nvim" = "2.44.0"
+neorg = "9.3.0"
+"rocks-git.nvim" = "2.5.3"
+telescope = "0.6.0"
+"neo-tree.nvim" = "3.26"
+"nvim-lspconfig" = {git="neovim/nvim-lspconfig", rev="v1.8.0"}
+
+[plugins.nvim-treesitter]
+git = "nvim-treesitter/nvim-treesitter"
+rev = "v0.9.3"
+
+[config]
+plugins_dir = "plugins/"
+auto_setup = false
