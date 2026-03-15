@@ -8,10 +8,16 @@ neorg = "9.3.0"
 telescope = "0.6.0"
 "neo-tree.nvim" = "3.26"
 "nvim-lspconfig" = {git="neovim/nvim-lspconfig", rev="v1.8.0"}
+"nvim-web-devicons" = "0.100"
+"lualine.nvim" = "scm"
+"alpha-nvim" = "scm"
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
 rev = "v0.9.3"
+
+[plugins.doom-one-nvim]
+git = "NTBBloodbath/doom-one.nvim"
 
 [config]
 plugins_dir = "plugins/"

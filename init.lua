@@ -2,6 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+-- Set to false if your terminal does NOT use a Nerd Font
+vim.g.have_nerd_font = true
+
 
 -- install Rocks
 do
