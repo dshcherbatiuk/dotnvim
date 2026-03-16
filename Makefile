@@ -1,7 +1,7 @@
 REPO := git@github.com:dshcherbatiuk/dotnvim.git
 NVIM_DIR := $(HOME)/.config/nvim
 
-.PHONY: help setup install pull push sync upgrade doctor fonts deps clean backup edit
+.PHONY: help setup install pull push sync upgrade doctor fonts deps java clean backup edit
 
 help: ## Show available commands
 	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
@@ -63,6 +63,9 @@ fonts: ## Install Nerd Font + configure Kitty
 
 deps: ## Install external deps (ImageMagick, mermaid-cli)
 	@./scripts/setup-deps.sh
+
+java: ## Install Java IDE tooling (jdtls, maven, gradle, formatter)
+	@./scripts/setup-java.sh
 
 clean: ## Remove plugin cache for fresh install
 	@echo "🧹 Clearing plugin cache..."

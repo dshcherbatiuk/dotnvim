@@ -3,8 +3,18 @@ if not ok then
   return
 end
 
+local actions = require("diffview.actions")
+
 diffview.setup({
   enhanced_diff_hl = true,
+  keymaps = {
+    file_panel = {
+      { "n", "q", false },
+    },
+    file_history_panel = {
+      { "n", "q", false },
+    },
+  },
   view = {
     default = {
       layout = "diff2_horizontal",

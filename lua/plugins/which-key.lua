@@ -78,7 +78,7 @@ wk.add({
   { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
   { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Log" },
   { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "Diff file history" },
-  { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Diff all changes" },
+  { "<leader>gD", "<cmd>DiffviewOpen HEAD<cr>", desc = "Diff all changes" },
   { "<leader>gm", "<cmd>DiffviewOpen<cr>", desc = "Merge tool (conflicts)" },
   { "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
   { "<leader>gB", function() require("gitsigns").blame_line({ full = true }) end, desc = "Blame line" },
@@ -141,10 +141,16 @@ wk.add({
   { "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
 })
 
--- IntelliJ-style keybindings (from your Doom config)
+-- IntelliJ-style keybindings
 wk.add({
-  { "<S-F6>", vim.lsp.buf.rename, desc = "Rename" },
-  { "<M-CR>", vim.lsp.buf.code_action, desc = "Code action" },
+  { "<S-F6>", vim.lsp.buf.rename, desc = "Rename (Shift+F6)" },
+  { "<M-CR>", vim.lsp.buf.code_action, desc = "Code action (Alt+Enter)" },
+  { "<C-S-n>", "<cmd>Telescope find_files<cr>", desc = "Find file (Ctrl+Shift+N)" },
+  { "<C-S-f>", "<cmd>Telescope live_grep<cr>", desc = "Find in path (Ctrl+Shift+F)" },
+  { "<F12>", vim.lsp.buf.definition, desc = "Go to definition (F12)" },
+  { "<C-F12>", vim.lsp.buf.type_definition, desc = "Go to type (Ctrl+F12)" },
+  { "<M-F7>", vim.lsp.buf.references, desc = "Find usages (Alt+F7)" },
+  { "<C-q>", vim.lsp.buf.hover, desc = "Quick docs (Ctrl+Q)" },
   { "<F2>", "<cmd>Oil<cr>", desc = "File explorer (dired)" },
   { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
 })

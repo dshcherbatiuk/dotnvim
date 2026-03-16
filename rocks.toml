@@ -18,6 +18,11 @@ neorg = "9.3.0"
 "diagram.nvim" = {git = "3rd/diagram.nvim"}
 "gitsigns.nvim" = {git = "lewis6991/gitsigns.nvim", rev = "v1.0.2"}
 "diffview.nvim" = {git = "sindrets/diffview.nvim"}
+"nvim-cmp" = {git = "hrsh7th/nvim-cmp"}
+"cmp-nvim-lsp" = {git = "hrsh7th/cmp-nvim-lsp"}
+"cmp-buffer" = {git = "hrsh7th/cmp-buffer"}
+"cmp-path" = {git = "hrsh7th/cmp-path"}
+"nvim-jdtls" = {git = "mfussenegger/nvim-jdtls"}
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"

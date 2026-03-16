@@ -6,6 +6,10 @@ require("nvim-treesitter.configs").setup({
     "vim",
     "vimdoc",
     "query",
+    "java",
+    "xml",
+    "yaml",
+    "json",
   },
   highlight = {
     enable = true,
