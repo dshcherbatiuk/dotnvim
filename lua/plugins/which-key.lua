@@ -102,6 +102,7 @@ wk.add({
   { "<leader>mn", "<cmd>MkdnNextHeading<cr>", desc = "Next heading" },
   { "<leader>mp", "<cmd>MkdnPrevHeading<cr>", desc = "Prev heading" },
   { "<leader>mT", "<cmd>MkdnTableFormat<cr>", desc = "Format table" },
+  { "<leader>mo", "<cmd>DiagramOpen<cr>", desc = "Open diagram in Preview" },
 
   -- Top-level shortcuts
   { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find file" },
