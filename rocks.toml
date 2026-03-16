@@ -5,13 +5,15 @@
 "rocks.nvim" = "2.44.0"
 neorg = "9.3.0"
 "rocks-git.nvim" = "2.5.3"
-"plenary.nvim" = "scm"
-"neo-tree.nvim" = "3.26"
+"plenary.nvim" = "0.1.4"
 "nvim-lspconfig" = {git="neovim/nvim-lspconfig", rev="v1.8.0"}
 "nvim-web-devicons" = "0.100"
 "lualine.nvim" = "scm"
 "alpha-nvim" = "scm"
-"which-key.nvim" = "scm"
+"which-key.nvim" = "3.17.0"
+"oil.nvim" = "2.15.0"
+"mkdnflow.nvim" = {git = "jakewvincent/mkdnflow.nvim"}
+"render-markdown.nvim" = {git = "MeanderingProgrammer/render-markdown.nvim"}
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"

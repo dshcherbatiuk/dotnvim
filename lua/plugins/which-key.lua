@@ -26,7 +26,18 @@ wk.add({
   -- +buffer
   { "<leader>b", group = "buffer" },
   { "<leader>bb", "<cmd>Telescope buffers<cr>", desc = "Switch buffer" },
-  { "<leader>bd", "<cmd>bdelete<cr>", desc = "Kill buffer" },
+  { "<leader>bk", function()
+    local buf = vim.api.nvim_get_current_buf()
+    local bufs = vim.tbl_filter(function(b)
+      return vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted
+    end, vim.api.nvim_list_bufs())
+    if #bufs > 1 then
+      vim.cmd("bprevious")
+    else
+      vim.cmd("enew")
+    end
+    vim.api.nvim_buf_delete(buf, { force = false })
+  end, desc = "Kill buffer" },
   { "<leader>bn", "<cmd>bnext<cr>", desc = "Next buffer" },
   { "<leader>bp", "<cmd>bprevious<cr>", desc = "Previous buffer" },
   { "<leader>bs", "<cmd>w<cr>", desc = "Save buffer" },
@@ -58,8 +69,8 @@ wk.add({
 
   -- +open
   { "<leader>o", group = "open" },
-  { "<leader>op", "<cmd>Neotree toggle<cr>", desc = "File explorer" },
-  { "<leader>oP", "<cmd>Neotree reveal<cr>", desc = "Find in explorer" },
+  { "<leader>op", "<cmd>Oil<cr>", desc = "File explorer (dired)" },
+  { "<leader>o-", "<cmd>Oil<cr>", desc = "Open parent directory" },
 
   -- +git (placeholders — expanded in Phase 5)
   { "<leader>g", group = "git" },
@@ -81,6 +92,16 @@ wk.add({
   { "<leader>r", group = "refactor" },
   { "<leader>rr", vim.lsp.buf.rename, desc = "Rename" },
   { "<leader>ra", vim.lsp.buf.code_action, desc = "Code action" },
+
+  -- +markdown/notes
+  { "<leader>m", group = "markdown" },
+  { "<leader>mf", desc = "Fold section" },
+  { "<leader>mu", desc = "Unfold section" },
+  { "<leader>mt", "<cmd>MkdnToggleToDo<cr>", desc = "Toggle TODO" },
+  { "<leader>ml", "<cmd>MkdnFollowLink<cr>", desc = "Follow link" },
+  { "<leader>mn", "<cmd>MkdnNextHeading<cr>", desc = "Next heading" },
+  { "<leader>mp", "<cmd>MkdnPrevHeading<cr>", desc = "Prev heading" },
+  { "<leader>mT", "<cmd>MkdnTableFormat<cr>", desc = "Format table" },
 
   -- Top-level shortcuts
   { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find file" },
@@ -112,5 +133,6 @@ wk.add({
 wk.add({
   { "<S-F6>", vim.lsp.buf.rename, desc = "Rename" },
   { "<M-CR>", vim.lsp.buf.code_action, desc = "Code action" },
-  { "<F2>", "<cmd>Neotree toggle<cr>", desc = "File explorer" },
+  { "<F2>", "<cmd>Oil<cr>", desc = "File explorer (dired)" },
+  { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
 })
