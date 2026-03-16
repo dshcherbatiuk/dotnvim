@@ -18,34 +18,12 @@ mkdnflow.setup({
     tables = true,
     yaml = false,
   },
-  -- Org-mode-like folding
-  folds = {
-    rmd_style = true,
-  },
-  -- Link concealing (like org-mode)
-  conceal = {
-    enabled = true,
-  },
-  -- TODO/checkbox cycling
-  to_do = {
-    symbols = { " ", "-", "x" },
-    update_parents = true,
-    not_started = " ",
-    in_progress = "-",
-    complete = "x",
-  },
-  -- Follow links in current window
   links = {
     style = "markdown",
     conceal = true,
-    transform_explicit = false,
   },
-  -- Table formatting
-  tables = {
-    trim_whitespace = true,
-    format_on_move = true,
-    auto_extend_rows = true,
-    auto_extend_cols = true,
+  to_do = {
+    create_on_toggle = true,
   },
   mappings = {
     MkdnEnter = { { "n", "v" }, "<CR>" },

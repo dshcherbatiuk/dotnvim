@@ -25,7 +25,7 @@ rocks.nvim uses luarocks instead of git-based plugin managers. Key differences:
 
 ## Current Plugins
 
-neorg, telescope, nvim-lspconfig, nvim-treesitter, doom-one, lualine, alpha-nvim, which-key, oil.nvim, nvim-web-devicons, mkdnflow, render-markdown.nvim
+neorg, telescope, nvim-lspconfig, nvim-treesitter, doom-one, lualine, alpha-nvim, which-key, oil.nvim, nvim-web-devicons, mkdnflow, render-markdown.nvim, image.nvim, diagram.nvim
 
 ## Adding Plugin Configuration
 

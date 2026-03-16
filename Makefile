@@ -1,7 +1,7 @@
 REPO := git@github.com:dshcherbatiuk/dotnvim.git
 NVIM_DIR := $(HOME)/.config/nvim
 
-.PHONY: help setup install pull push sync upgrade doctor fonts clean backup edit
+.PHONY: help setup install pull push sync upgrade doctor fonts deps clean backup edit
 
 help: ## Show available commands
 	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
@@ -11,7 +11,7 @@ help: ## Show available commands
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36mmake %-12s\033[0m %s\n", $$1, $$2}'
 
-setup: fonts sync ## First-time setup on a new machine
+setup: fonts deps sync ## First-time setup on a new machine
 	@echo "✅ Setup complete! Restart your terminal, then open nvim."
 
 pull: ## Pull latest config + sync plugins
@@ -60,6 +60,9 @@ doctor: ## Check health: fonts, LSP servers, plugins
 
 fonts: ## Install Nerd Font + configure Kitty
 	@./scripts/setup-fonts.sh
+
+deps: ## Install external deps (ImageMagick, mermaid-cli)
+	@./scripts/setup-deps.sh
 
 clean: ## Remove plugin cache for fresh install
 	@echo "🧹 Clearing plugin cache..."

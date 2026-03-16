@@ -14,6 +14,8 @@ neorg = "9.3.0"
 "oil.nvim" = "2.15.0"
 "mkdnflow.nvim" = {git = "jakewvincent/mkdnflow.nvim"}
 "render-markdown.nvim" = {git = "MeanderingProgrammer/render-markdown.nvim"}
+"image.nvim" = {git = "3rd/image.nvim"}
+"diagram.nvim" = {git = "3rd/diagram.nvim"}
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"

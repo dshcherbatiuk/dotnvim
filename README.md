@@ -13,13 +13,14 @@ make setup
 ## Commands
 
 ```
-make setup     # First-time setup: install fonts + sync plugins
+make setup     # First-time setup: fonts + deps + sync plugins
 make pull      # Pull latest config + sync plugins
 make push      # Commit and push config changes
 make sync      # Sync plugins from rocks.toml
 make upgrade   # Update all plugins to latest
 make doctor    # Diagnose issues: fonts, LSP servers, plugins
 make fonts     # Install Nerd Font + configure Kitty
+make deps      # Install external deps (ImageMagick, mermaid-cli)
 make backup    # Backup config to ~/.config/nvim.bak
 make clean     # Wipe plugin cache for fresh install
 make edit      # Open config in Neovim
@@ -29,8 +30,20 @@ make edit      # Open config in Neovim
 
 - Neovim >= 0.10
 - [Homebrew](https://brew.sh) (for font installation)
-- [Kitty](https://sw.kovidgoyal.net/kitty/) terminal
+- [Kitty](https://sw.kovidgoyal.net/kitty/) terminal (>= 28.0, for inline image rendering)
+- [Node.js](https://nodejs.org/) (for mermaid-cli)
 - A [Nerd Font](https://www.nerdfonts.com/) (`make fonts` installs one)
+
+## Markdown Features
+
+Markdown files have org-mode-like editing powered by mkdnflow + render-markdown.nvim:
+
+- **Folding** — `<leader>mf` / `<leader>mu` to fold/unfold sections
+- **TODO/Checkboxes** — `<C-Space>` to toggle, cycles through `[ ]` / `[-]` / `[x]`
+- **Heading navigation** — `]]` / `[[` to jump between headings, `+` / `=` to promote/demote
+- **Link following** — `<CR>` to follow, `<BS>` to go back
+- **Tables** — `<Tab>` / `<S-Tab>` to navigate cells, `<leader>mT` to format
+- **Mermaid diagrams** — rendered as inline images via Kitty graphics protocol (`make deps` installs ImageMagick + mermaid-cli)
 
 ## Structure
 
