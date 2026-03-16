@@ -72,11 +72,22 @@ wk.add({
   { "<leader>op", "<cmd>Oil<cr>", desc = "File explorer (dired)" },
   { "<leader>o-", "<cmd>Oil<cr>", desc = "Open parent directory" },
 
-  -- +git (placeholders — expanded in Phase 5)
+  -- +git
   { "<leader>g", group = "git" },
   { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Git status" },
   { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
   { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Log" },
+  { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "Diff file history" },
+  { "<leader>gD", "<cmd>DiffviewOpen<cr>", desc = "Diff all changes" },
+  { "<leader>gm", "<cmd>DiffviewOpen<cr>", desc = "Merge tool (conflicts)" },
+  { "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
+  { "<leader>gB", function() require("gitsigns").blame_line({ full = true }) end, desc = "Blame line" },
+  { "<leader>gp", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },
+  { "<leader>gr", function() require("gitsigns").reset_hunk() end, desc = "Reset hunk" },
+  { "<leader>gS", function() require("gitsigns").stage_hunk() end, desc = "Stage hunk" },
+  { "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, desc = "Undo stage hunk" },
+  { "<leader>gR", function() require("gitsigns").reset_buffer() end, desc = "Reset buffer" },
+  { "<leader>gt", function() require("gitsigns").toggle_current_line_blame() end, desc = "Toggle line blame" },
 
   -- +code
   { "<leader>c", group = "code" },

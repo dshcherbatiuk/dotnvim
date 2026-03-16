@@ -31,7 +31,7 @@ push: ## Commit and push config changes
 
 sync: ## Sync plugins from rocks.toml
 	@echo "🔄 Syncing plugins..."
-	@nvim --headless -c "Rocks sync" -c "sleep 5" -c "qa!" 2>&1 || true
+	@nvim --headless -c "Rocks sync" -c "sleep 15" -c "qa!" 2>&1 || true
 	@echo "✅ Plugins synced"
 
 upgrade: ## Update all plugins to latest

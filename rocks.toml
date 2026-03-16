@@ -16,6 +16,8 @@ neorg = "9.3.0"
 "render-markdown.nvim" = {git = "MeanderingProgrammer/render-markdown.nvim"}
 "image.nvim" = {git = "3rd/image.nvim"}
 "diagram.nvim" = {git = "3rd/diagram.nvim"}
+"gitsigns.nvim" = {git = "lewis6991/gitsigns.nvim", rev = "v1.0.2"}
+"diffview.nvim" = {git = "sindrets/diffview.nvim"}
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"
