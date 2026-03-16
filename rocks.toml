@@ -23,6 +23,7 @@ neorg = "9.3.0"
 "cmp-buffer" = {git = "hrsh7th/cmp-buffer"}
 "cmp-path" = {git = "hrsh7th/cmp-path"}
 "nvim-jdtls" = {git = "mfussenegger/nvim-jdtls"}
+"project.nvim" = {git = "ahmedkhalf/project.nvim"}
 
 [plugins.nvim-treesitter]
 git = "nvim-treesitter/nvim-treesitter"

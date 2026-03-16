@@ -65,7 +65,8 @@ wk.add({
   -- +project
   { "<leader>p", group = "project" },
   { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find file in project" },
-  { "<leader>pp", "<cmd>Telescope find_files cwd=~/dev<cr>", desc = "Switch project" },
+  { "<leader>pp", "<cmd>Telescope projects<cr>", desc = "Recent projects" },
+  { "<leader>pr", "<cmd>ProjectRoot<cr>", desc = "Go to project root" },
 
   -- +open
   { "<leader>o", group = "open" },
