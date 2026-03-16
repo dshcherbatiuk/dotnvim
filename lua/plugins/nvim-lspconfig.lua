@@ -37,26 +37,24 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
--- Servers that just need default config
+-- Servers: { lspconfig_name, binary_name }
 -- Java is handled separately by nvim-jdtls
 local servers = {
-  "pyright",
-  "rust_analyzer",
-  "clangd",
-  "bashls",
-  "dockerls",
-  "yamlls",
-  "jsonls",
+  { "pyright", "pyright-langserver" },
+  { "rust_analyzer", "rust-analyzer" },
+  { "clangd", "clangd" },
+  { "bashls", "bash-language-server" },
+  { "dockerls", "docker-langserver" },
+  { "yamlls", "yaml-language-server" },
+  { "jsonls", "vscode-json-language-server" },
 }
 
-for _, server in ipairs(servers) do
-  local server_ok, _ = pcall(function()
+for _, entry in ipairs(servers) do
+  local server, binary = entry[1], entry[2]
+  if vim.fn.executable(binary) == 1 then
     lspconfig[server].setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })
-  end)
-  if not server_ok then
-    -- Server binary not installed, skip silently
   end
 end
