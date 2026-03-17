@@ -7,6 +7,8 @@ require("nvim-treesitter.configs").setup({
     "vimdoc",
     "query",
     "java",
+    "rust",
+    "toml",
     "xml",
     "yaml",
     "json",

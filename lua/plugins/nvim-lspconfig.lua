@@ -39,9 +39,9 @@ vim.diagnostic.config({
 
 -- Servers: { lspconfig_name, binary_name }
 -- Java is handled separately by nvim-jdtls
+-- Rust is handled separately below
 local servers = {
   { "pyright", "pyright-langserver" },
-  { "rust_analyzer", "rust-analyzer" },
   { "clangd", "clangd" },
   { "bashls", "bash-language-server" },
   { "dockerls", "docker-langserver" },

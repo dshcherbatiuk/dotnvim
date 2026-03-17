@@ -1,7 +1,7 @@
 REPO := git@github.com:dshcherbatiuk/dotnvim.git
 NVIM_DIR := $(HOME)/.config/nvim
 
-.PHONY: help setup install pull push sync upgrade doctor fonts deps lsp java open clean-projects clean backup edit
+.PHONY: help setup install pull push sync upgrade doctor fonts deps lsp java rust open clean-projects clean backup edit
 
 help: ## Show available commands
 	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
@@ -69,6 +69,9 @@ lsp: ## Install language servers (yaml, bash, json, python, rust, etc.)
 
 java: ## Install Java IDE tooling (jdtls, maven, gradle, formatter)
 	@./scripts/setup-java.sh
+
+rust: ## Install Rust IDE tooling (rust-analyzer, clippy, rustfmt)
+	@./scripts/setup-rust.sh
 
 open: ## Open Neovim with project picker
 	@nvim -c "Telescope projects"
