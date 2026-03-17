@@ -8,6 +8,9 @@ vim.g.have_nerd_font = true
 -- Highlight current line
 vim.opt.cursorline = true
 
+-- Sync yank with system clipboard
+vim.opt.clipboard = "unnamedplus"
+
 
 -- install Rocks
 do
