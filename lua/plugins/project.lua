@@ -7,20 +7,7 @@ project.setup({
   -- Detection methods: look for these markers to find project root
   detection_methods = { "pattern", "lsp" },
 
-  -- Project root markers (order matters — first match wins)
-  patterns = {
-    ".git",
-    "pom.xml",
-    "build.gradle",
-    "build.gradle.kts",
-    "Cargo.toml",
-    "package.json",
-    "Makefile",
-    "mix.exs",
-    "pyproject.toml",
-    "setup.py",
-    "go.mod",
-  },
+  patterns = { ".git" },
 
   -- Don't change cwd automatically on BufEnter, only when opening a project
   silent_chdir = true,

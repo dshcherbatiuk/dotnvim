@@ -1,7 +1,7 @@
 REPO := git@github.com:dshcherbatiuk/dotnvim.git
 NVIM_DIR := $(HOME)/.config/nvim
 
-.PHONY: help setup install pull push sync upgrade doctor fonts deps lsp java open clean backup edit
+.PHONY: help setup install pull push sync upgrade doctor fonts deps lsp java open clean-projects clean backup edit
 
 help: ## Show available commands
 	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
@@ -72,6 +72,11 @@ java: ## Install Java IDE tooling (jdtls, maven, gradle, formatter)
 
 open: ## Open Neovim with project picker
 	@nvim -c "Telescope projects"
+
+clean-projects: ## Clear remembered projects list
+	@echo "🧹 Clearing project history..."
+	@echo -n "" > ~/.local/share/nvim/project_nvim/project_history
+	@echo "✅ Project history cleared"
 
 clean: ## Remove plugin cache for fresh install
 	@echo "🧹 Clearing plugin cache..."
