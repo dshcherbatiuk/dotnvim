@@ -1,7 +1,7 @@
 REPO := git@github.com:dshcherbatiuk/dotnvim.git
 NVIM_DIR := $(HOME)/.config/nvim
 
-.PHONY: help setup install pull push sync upgrade doctor fonts deps lsp java rust open clean-projects clean backup edit
+.PHONY: help setup install pull push sync upgrade doctor nvim fonts deps lsp java rust open clean-projects clean backup edit
 
 help: ## Show available commands
 	@echo "\033[1mdotnvim\033[0m — Neovim config manager"
@@ -11,7 +11,7 @@ help: ## Show available commands
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36mmake %-12s\033[0m %s\n", $$1, $$2}'
 
-setup: fonts deps sync ## First-time setup on a new machine
+setup: nvim fonts deps sync ## First-time setup on a new machine
 	@echo "✅ Setup complete! Restart your terminal, then open nvim."
 
 pull: ## Pull latest config + sync plugins
@@ -57,6 +57,9 @@ doctor: ## Check health: fonts, LSP servers, plugins
 	@echo ""
 	@echo "→ Plugin configs:"
 	@nvim --headless -c "checkhealth rocks-config" -c "qa!" 2>&1 | grep -E "OK|WARN|ERROR" || true
+
+nvim: ## Install or update Neovim (requires Homebrew)
+	@./scripts/setup-nvim.sh
 
 fonts: ## Install Nerd Font + configure Kitty
 	@./scripts/setup-fonts.sh
