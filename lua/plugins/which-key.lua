@@ -22,6 +22,22 @@ wk.add({
   { "<leader>fs", "<cmd>w<cr>", desc = "Save file" },
   { "<leader>fS", "<cmd>wa<cr>", desc = "Save all" },
   { "<leader>fn", "<cmd>enew<cr>", desc = "New file" },
+  { "<leader>fy", function()
+    local path
+    local ok, oil = pcall(require, "oil")
+    if ok and oil.get_current_dir() then
+      local entry = oil.get_cursor_entry()
+      if entry then
+        path = oil.get_current_dir() .. entry.name
+      else
+        path = oil.get_current_dir()
+      end
+    else
+      path = vim.fn.expand("%:p")
+    end
+    vim.fn.setreg("+", path)
+    vim.notify("📋 " .. path, vim.log.levels.INFO)
+  end, desc = "Copy file path" },
   { "<leader>fd", function()
     local file1 = vim.fn.expand("%:p")
     vim.ui.input({ prompt = "Diff with: ", completion = "file" }, function(file2)
