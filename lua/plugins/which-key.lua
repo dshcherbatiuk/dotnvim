@@ -22,6 +22,21 @@ wk.add({
   { "<leader>fs", "<cmd>w<cr>", desc = "Save file" },
   { "<leader>fS", "<cmd>wa<cr>", desc = "Save all" },
   { "<leader>fn", "<cmd>enew<cr>", desc = "New file" },
+  { "<leader>fd", function()
+    local file1 = vim.fn.expand("%:p")
+    vim.ui.input({ prompt = "Diff with: ", completion = "file" }, function(file2)
+      if file2 and file2 ~= "" then
+        vim.cmd("vsplit " .. vim.fn.fnameescape(file2))
+        vim.cmd("windo diffthis")
+        vim.cmd("windo set scrollbind cursorbind foldlevel=0")
+      end
+    end)
+  end, desc = "Diff with file" },
+  { "<leader>fD", "<cmd>windo diffoff<cr>", desc = "Diff off (close diff)" },
+  { "<leader>fo", "do", desc = "Diff obtain (pull change)" },
+  { "<leader>fp", "dp", desc = "Diff put (push change)" },
+  { "<leader>fj", "]c", desc = "Next diff change" },
+  { "<leader>fk", "[c", desc = "Prev diff change" },
 
   -- +buffer
   { "<leader>b", group = "buffer" },
