@@ -9,6 +9,7 @@ require("nvim-treesitter.configs").setup({
     "java",
     "rust",
     "toml",
+    "groovy",
     "xml",
     "yaml",
     "json",

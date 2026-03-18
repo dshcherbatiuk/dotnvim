@@ -66,4 +66,5 @@ if not pcall(require, "rocks") then
     vim.fn.delete(rocks_location, "rf")
 end
 
-
+-- Load language configs not tied to a rocks.nvim plugin
+require("plugins.gradle")
