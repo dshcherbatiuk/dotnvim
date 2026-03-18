@@ -68,3 +68,6 @@ end
 
 -- Load language configs not tied to a rocks.nvim plugin
 require("plugins.gradle")
+
+-- Use Telescope for / search in buffer
+vim.keymap.set("n", "/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
