@@ -121,6 +121,25 @@ wk.add({
   { "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, desc = "Undo stage hunk" },
   { "<leader>gR", function() require("gitsigns").reset_buffer() end, desc = "Reset buffer" },
   { "<leader>gt", function() require("gitsigns").toggle_current_line_blame() end, desc = "Toggle line blame" },
+  { "<leader>gM", function()
+    require("telescope.builtin").git_branches({
+      prompt_title = "Merge branch",
+      attach_mappings = function(prompt_bufnr)
+        require("telescope.actions").select_default:replace(function()
+          local selection = require("telescope.actions.state").get_selected_entry()
+          require("telescope.actions").close(prompt_bufnr)
+          if selection then
+            local branch = selection.value
+            vim.cmd("!git merge " .. branch)
+          end
+        end)
+        return true
+      end,
+    })
+  end, desc = "Merge branch" },
+  { "<leader>gP", "<cmd>!git push<cr>", desc = "Push" },
+  { "<leader>gF", "<cmd>!git pull<cr>", desc = "Pull" },
+  { "<leader>gf", "<cmd>!git fetch<cr>", desc = "Fetch" },
 
   -- +code
   { "<leader>c", group = "code" },

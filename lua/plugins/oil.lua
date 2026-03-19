@@ -4,6 +4,11 @@ if not ok then
 end
 
 oil.setup({
+  -- Only handle actual file:// and oil:// schemes
+  skip_confirm_for_simple_edits = true,
+  buf_options = {
+    buflisted = false,
+  },
   -- Auto-refresh when files change externally
   watch_for_changes = true,
   -- Show hidden files like dired's C-u s
