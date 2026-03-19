@@ -108,7 +108,20 @@ wk.add({
   -- +git
   { "<leader>g", group = "git" },
   { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Git status" },
-  { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
+  { "<leader>gb", function()
+    require("telescope.builtin").git_branches({
+      attach_mappings = function(_, map)
+        map("i", "<S-y>", function()
+          local selection = require("telescope.actions.state").get_selected_entry()
+          if selection then
+            vim.fn.setreg("+", selection.value)
+            vim.notify("📋 " .. selection.value, vim.log.levels.INFO)
+          end
+        end)
+        return true
+      end,
+    })
+  end, desc = "Branches" },
   { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Log" },
   { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "Diff file history" },
   { "<leader>gD", "<cmd>DiffviewOpen HEAD<cr>", desc = "Diff all changes" },
