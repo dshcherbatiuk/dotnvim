@@ -13,12 +13,10 @@ local function setup_jdtls()
     capabilities = cmp_lsp.default_capabilities(capabilities)
   end
 
-  -- Find project root
-  local root_markers = { "pom.xml", "build.gradle", "build.gradle.kts", ".git", "mvnw", "gradlew" }
-  local root_dir = require("jdtls.setup").find_root(root_markers)
-  if not root_dir then
-    root_dir = vim.fn.getcwd()
-  end
+  -- Find project root: prioritize .git to get the whole repo, not a submodule
+  local root_dir = require("jdtls.setup").find_root({ ".git" })
+    or require("jdtls.setup").find_root({ "pom.xml", "build.gradle", "build.gradle.kts", "mvnw", "gradlew" })
+    or vim.fn.getcwd()
 
   -- Workspace dir per project
   local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
@@ -77,11 +75,11 @@ local function setup_jdtls()
     on_attach = function(_, bufnr)
       local opts = { buffer = bufnr }
 
-      -- Standard LSP keybindings
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-      vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+      -- Standard LSP keybindings (via Telescope)
+      vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+      vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+      vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+      vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
       vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
       vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 

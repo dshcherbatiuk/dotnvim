@@ -12,10 +12,10 @@ end
 -- Shared on_attach for all LSP servers
 local on_attach = function(_, bufnr)
   local opts = { buffer = bufnr }
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-  vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+  vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+  vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+  vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+  vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<S-F6>", vim.lsp.buf.rename, opts)
