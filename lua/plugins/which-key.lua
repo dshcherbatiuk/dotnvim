@@ -87,7 +87,8 @@ wk.add({
 
   -- +search
   { "<leader>s", group = "search" },
-  { "<leader>sp", "<cmd>Telescope live_grep<cr>", desc = "Search project" },
+  { "<leader>sp", function() require("telescope.builtin").live_grep({ additional_args = { "--fixed-strings" } }) end, desc = "Search project" },
+  { "<leader>sP", "<cmd>Telescope live_grep<cr>", desc = "Search project (regex)" },
   { "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search buffer" },
   { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search files" },
   { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Search help" },
@@ -183,7 +184,7 @@ wk.add({
   -- Top-level shortcuts
   { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find file" },
   { "<leader>:", "<cmd>Telescope commands<cr>", desc = "Commands" },
-  { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Search project" },
+  { "<leader>/", function() require("telescope.builtin").live_grep({ additional_args = { "--fixed-strings" } }) end, desc = "Search project" },
   { "<leader>,", "<cmd>Telescope buffers<cr>", desc = "Switch buffer" },
   { "<leader>.", "<cmd>Telescope find_files<cr>", desc = "Find file" },
   { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
