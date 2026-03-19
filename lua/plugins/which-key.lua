@@ -187,6 +187,7 @@ wk.add({
   { "<leader>,", "<cmd>Telescope buffers<cr>", desc = "Switch buffer" },
   { "<leader>.", "<cmd>Telescope find_files<cr>", desc = "Find file" },
   { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
+  { "<leader><", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
 
   -- +help
   { "<leader>h", group = "help" },
