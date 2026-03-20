@@ -82,8 +82,8 @@ echo "🔍 Checking vscode-java-test..."
 if [ -d "$JAVA_TEST_DIR" ]; then
   echo "✅ vscode-java-test already installed"
 else
-  echo "📦 Installing vscode-java-test..."
-  git clone https://github.com/microsoft/vscode-java-test.git "$JAVA_TEST_DIR"
+  echo "📦 Installing vscode-java-test (pinned to 0.44.0)..."
+  git clone --branch 0.44.0 --depth 1 https://github.com/microsoft/vscode-java-test.git "$JAVA_TEST_DIR"
   cd "$JAVA_TEST_DIR"
   npm install
   npm run build-plugin
