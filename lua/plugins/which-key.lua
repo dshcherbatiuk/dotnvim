@@ -177,6 +177,8 @@ wk.add({
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
   { "<leader>cf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
   { "<leader>cd", vim.diagnostic.open_float, desc = "Line diagnostics" },
+  { "<leader>cD", "<cmd>Telescope diagnostics<cr>", desc = "All diagnostics" },
+  { "<leader>ce", "<cmd>Telescope diagnostics severity=ERROR<cr>", desc = "Errors only" },
 
   -- +debug (placeholders — expanded in Phase 7)
   { "<leader>d", group = "debug" },
