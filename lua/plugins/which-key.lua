@@ -38,6 +38,22 @@ wk.add({
     vim.fn.setreg("+", path)
     vim.notify("📋 " .. path, vim.log.levels.INFO)
   end, desc = "Copy file path" },
+  { "<leader>fY", function()
+    local name
+    local ok, oil = pcall(require, "oil")
+    if ok and oil.get_current_dir() then
+      local entry = oil.get_cursor_entry()
+      if entry then
+        name = entry.name
+      end
+    else
+      name = vim.fn.expand("%:t")
+    end
+    if name then
+      vim.fn.setreg("+", name)
+      vim.notify("📋 " .. name, vim.log.levels.INFO)
+    end
+  end, desc = "Copy file name" },
   { "<leader>fd", function()
     local file1 = vim.fn.expand("%:p")
     vim.ui.input({ prompt = "Diff with: ", completion = "file" }, function(file2)
