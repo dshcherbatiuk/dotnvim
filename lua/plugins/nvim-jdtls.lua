@@ -1,9 +1,34 @@
--- nvim-jdtls: Java LSP with extended capabilities
+-- nvim-jdtls: Java LSP with extended capabilities + debugging
 -- Auto-starts jdtls when opening Java files
 
 local ok, jdtls = pcall(require, "jdtls")
 if not ok then
   return
+end
+
+-- Find debug adapter bundles
+local function get_debug_bundles()
+  local bundles = {}
+  local java_debug_jar = vim.fn.glob(
+    vim.fn.expand("~/.local/share/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+    true
+  )
+  if java_debug_jar ~= "" then
+    table.insert(bundles, java_debug_jar)
+  end
+
+  local java_test_jars = vim.fn.glob(
+    vim.fn.expand("~/.local/share/nvim/vscode-java-test/server/*.jar"),
+    true, true
+  )
+  for _, jar in ipairs(java_test_jars or {}) do
+    if not vim.endswith(jar, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
+      and not vim.endswith(jar, "jacocoagent.jar") then
+      table.insert(bundles, jar)
+    end
+  end
+
+  return bundles
 end
 
 local function setup_jdtls()
@@ -33,6 +58,9 @@ local function setup_jdtls()
     cmd = { "jdtls", "-data", workspace_dir },
     root_dir = root_dir,
     capabilities = capabilities,
+    init_options = {
+      bundles = get_debug_bundles(),
+    },
 
     settings = {
       java = {
@@ -110,6 +138,9 @@ local function setup_jdtls()
         { buffer = bufnr, desc = "Test method" })
       vim.keymap.set("n", ",T", function() jdtls.test_class() end,
         { buffer = bufnr, desc = "Test class" })
+
+      -- Setup DAP after jdtls is ready
+      jdtls.setup_dap({ hotcodereplace = "auto" })
 
       -- Format on save
       vim.api.nvim_create_autocmd("BufWritePre", {

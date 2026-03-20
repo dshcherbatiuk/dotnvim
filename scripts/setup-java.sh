@@ -62,6 +62,35 @@ else
   echo "✅ google-java-format installed"
 fi
 
+# java-debug adapter
+JAVA_DEBUG_DIR="$HOME/.local/share/nvim/java-debug"
+echo "🔍 Checking java-debug..."
+if [ -d "$JAVA_DEBUG_DIR" ]; then
+  echo "✅ java-debug already installed"
+else
+  echo "📦 Installing java-debug..."
+  git clone https://github.com/microsoft/java-debug.git "$JAVA_DEBUG_DIR"
+  cd "$JAVA_DEBUG_DIR"
+  ./mvnw clean install -DskipTests
+  cd -
+  echo "✅ java-debug installed"
+fi
+
+# java-test adapter
+JAVA_TEST_DIR="$HOME/.local/share/nvim/vscode-java-test"
+echo "🔍 Checking vscode-java-test..."
+if [ -d "$JAVA_TEST_DIR" ]; then
+  echo "✅ vscode-java-test already installed"
+else
+  echo "📦 Installing vscode-java-test..."
+  git clone https://github.com/microsoft/vscode-java-test.git "$JAVA_TEST_DIR"
+  cd "$JAVA_TEST_DIR"
+  npm install
+  npm run build-plugin
+  cd -
+  echo "✅ vscode-java-test installed"
+fi
+
 echo ""
 echo "🎉 Java IDE tooling ready!"
 echo ""

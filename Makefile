@@ -11,7 +11,7 @@ help: ## Show available commands
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36mmake %-12s\033[0m %s\n", $$1, $$2}'
 
-setup: nvim fonts deps bootstrap sync ## First-time setup on a new machine
+setup: nvim fonts deps lsp java rust bootstrap sync ## Full setup: nvim + fonts + all languages + plugins
 	@echo "✅ Setup complete! Restart your terminal, then open nvim."
 
 pull: ## Pull latest config + sync plugins

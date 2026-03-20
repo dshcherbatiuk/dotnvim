@@ -180,6 +180,20 @@ wk.add({
 
   -- +debug (placeholders — expanded in Phase 7)
   { "<leader>d", group = "debug" },
+  { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+  { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Conditional breakpoint" },
+  { "<leader>dc", function() require("dap").continue() end, desc = "Continue (F9)" },
+  { "<leader>di", function() require("dap").step_into() end, desc = "Step into (F7)" },
+  { "<leader>do", function() require("dap").step_over() end, desc = "Step over (F8)" },
+  { "<leader>dO", function() require("dap").step_out() end, desc = "Step out" },
+  { "<leader>dr", function() require("dap").restart() end, desc = "Restart" },
+  { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+  { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle UI" },
+  { "<leader>de", function() require("dapui").eval() end, desc = "Eval expression" },
+  { "<leader>dl", function() require("dap").run_last() end, desc = "Run last" },
+  { "<F7>", function() require("dap").step_into() end, desc = "Step into" },
+  { "<F8>", function() require("dap").step_over() end, desc = "Step over" },
+  { "<F9>", function() require("dap").continue() end, desc = "Continue" },
 
   -- +refactor
   { "<leader>r", group = "refactor" },
