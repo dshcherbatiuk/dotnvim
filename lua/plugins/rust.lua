@@ -16,6 +16,49 @@ if ok_cmp then
   capabilities = cmp_lsp.default_capabilities(capabilities)
 end
 
+-- DAP: codelldb debug adapter for Rust
+local ok_dap, dap = pcall(require, "dap")
+if ok_dap then
+  local codelldb_dir = vim.fn.expand("~/.local/share/nvim/codelldb/extension/adapter")
+  local codelldb_path = codelldb_dir .. "/codelldb"
+  local liblldb_path = codelldb_dir .. "/liblldb.dylib"
+
+  if vim.fn.filereadable(codelldb_path) == 1 then
+    dap.adapters.codelldb = {
+      type = "server",
+      port = "${port}",
+      executable = {
+        command = codelldb_path,
+        args = { "--port", "${port}" },
+      },
+    }
+
+    dap.configurations.rust = {
+      {
+        name = "Launch",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+      },
+      {
+        name = "Launch (cargo build first)",
+        type = "codelldb",
+        request = "launch",
+        preLaunchTask = "cargo build",
+        program = function()
+          return vim.fn.input("Executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+      },
+    }
+  end
+end
+
 lspconfig.rust_analyzer.setup({
   capabilities = capabilities,
   on_attach = function(_, bufnr)

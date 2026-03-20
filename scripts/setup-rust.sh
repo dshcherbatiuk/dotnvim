@@ -67,6 +67,29 @@ else
   echo "✅ cargo-watch installed"
 fi
 
+# codelldb — debug adapter for Rust
+CODELLDB_DIR="$HOME/.local/share/nvim/codelldb"
+echo "🔍 Checking codelldb..."
+if [ -d "$CODELLDB_DIR" ]; then
+  echo "✅ codelldb already installed"
+else
+  echo "📦 Installing codelldb..."
+  ARCH=$(uname -m)
+  if [ "$ARCH" = "arm64" ]; then
+    CODELLDB_ARCH="aarch64"
+  else
+    CODELLDB_ARCH="x86_64"
+  fi
+  CODELLDB_URL="https://github.com/vadimcn/codelldb/releases/latest/download/codelldb-${CODELLDB_ARCH}-darwin.vsix"
+  mkdir -p "$CODELLDB_DIR"
+  curl -L "$CODELLDB_URL" -o /tmp/codelldb.vsix
+  cd "$CODELLDB_DIR"
+  unzip -o /tmp/codelldb.vsix
+  rm /tmp/codelldb.vsix
+  cd -
+  echo "✅ codelldb installed"
+fi
+
 echo ""
 echo "🎉 Rust IDE tooling ready!"
 echo ""
@@ -75,3 +98,4 @@ echo "  rust-analyzer  — Language server (LSP)"
 echo "  clippy         — Linter"
 echo "  rustfmt        — Formatter"
 echo "  cargo-watch    — Auto-rebuild on save"
+echo "  codelldb       — Debug adapter"
