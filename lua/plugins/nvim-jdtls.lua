@@ -55,7 +55,7 @@ local function setup_jdtls()
   end
 
   local config = {
-    cmd = { "jdtls", "-data", workspace_dir },
+    cmd = { "jdtls", "--jvm-arg=-Xmx4g", "-data", workspace_dir },
     root_dir = root_dir,
     capabilities = capabilities,
     init_options = {
