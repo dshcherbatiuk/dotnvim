@@ -89,7 +89,24 @@ local function setup_jdtls()
           },
         },
         configuration = {
-          updateBuildConfiguration = "interactive",
+          updateBuildConfiguration = "automatic",
+        },
+        autobuild = { enabled = true },
+        eclipse = {
+          downloadSources = true,
+        },
+        -- Recognize generated sources (Dagger, annotation processors)
+        project = {
+          referencedLibraries = {
+            "lib/**/*.jar",
+            "build/libs/**/*.jar",
+          },
+          sourcePaths = {
+            "src/main/java",
+            "src/test/java",
+            "build/generated/sources/annotationProcessor/java/main",
+            "target/generated-sources/annotations",
+          },
         },
         maven = {
           downloadSources = true,
@@ -97,6 +114,10 @@ local function setup_jdtls()
         implementationsCodeLens = { enabled = true },
         referencesCodeLens = { enabled = true },
         format = { enabled = true },
+        codeGeneration = {
+          generateComments = true,
+          useBlocks = true,
+        },
       },
     },
 
@@ -141,6 +162,14 @@ local function setup_jdtls()
 
       -- Setup DAP after jdtls is ready
       jdtls.setup_dap({ hotcodereplace = "auto" })
+
+      -- Java-specific commands
+      vim.keymap.set("n", ",R", "<cmd>JdtWipeDataAndRestart<cr>",
+        { buffer = bufnr, desc = "Restart jdtls (clean)" })
+      vim.keymap.set("n", ",u", "<cmd>JdtUpdateConfig<cr>",
+        { buffer = bufnr, desc = "Update project config" })
+      vim.keymap.set("n", ",b", "<cmd>!./gradlew build<cr>",
+        { buffer = bufnr, desc = "Gradle build" })
 
       -- Format on save
       vim.api.nvim_create_autocmd("BufWritePre", {
