@@ -4,7 +4,7 @@ if not ok then
 end
 
 oil.setup({
-  -- Only handle actual file:// and oil:// schemes
+  default_file_explorer = false,
   skip_confirm_for_simple_edits = true,
   buf_options = {
     buflisted = false,

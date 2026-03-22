@@ -105,6 +105,9 @@ wk.add({
   { "<leader>s", group = "search" },
   { "<leader>sp", function() require("telescope.builtin").live_grep({ additional_args = { "--fixed-strings" } }) end, desc = "Search project" },
   { "<leader>sP", "<cmd>Telescope live_grep<cr>", desc = "Search project (regex)" },
+  { "<leader>sa", function() require("telescope.builtin").live_grep({ additional_args = { "--fixed-strings", "--no-ignore" } }) end, desc = "Search all (incl. generated)" },
+  { "<leader>sw", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Search symbol (incl. deps)" },
+  { "<leader>sW", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Search symbol (live)" },
   { "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search buffer" },
   { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search files" },
   { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Search help" },
@@ -143,6 +146,17 @@ wk.add({
   { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "Diff file history" },
   { "<leader>gD", "<cmd>DiffviewOpen HEAD<cr>", desc = "Diff all changes" },
   { "<leader>gm", "<cmd>DiffviewOpen<cr>", desc = "Merge tool (conflicts)" },
+  { "<leader>gc", function()
+    local base = vim.fn.system("git merge-base HEAD @{upstream} 2>/dev/null"):gsub("%s+", "")
+    if base == "" then
+      base = vim.fn.system("git merge-base HEAD origin/main 2>/dev/null"):gsub("%s+", "")
+    end
+    if base ~= "" then
+      vim.cmd("DiffviewOpen " .. base)
+    else
+      vim.notify("Could not find base branch", vim.log.levels.WARN)
+    end
+  end, desc = "Branch changes (vs parent)" },
   { "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
   { "<leader>gB", function() require("gitsigns").blame_line({ full = true }) end, desc = "Blame line" },
   { "<leader>gp", function() require("gitsigns").preview_hunk() end, desc = "Preview hunk" },

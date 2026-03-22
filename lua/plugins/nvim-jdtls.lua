@@ -142,9 +142,12 @@ local function setup_jdtls()
       vim.keymap.set("n", "<M-F7>", vim.lsp.buf.references, opts)
       vim.keymap.set("n", "<C-q>", vim.lsp.buf.hover, opts)
 
-      -- Java-specific localleader keybindings (, prefix)
+      -- Java localleader keybindings (, prefix)
+      -- Import
       vim.keymap.set("n", ",o", function() jdtls.organize_imports() end,
         { buffer = bufnr, desc = "Organize imports" })
+
+      -- Extract / Refactor
       vim.keymap.set("n", ",ev", function() jdtls.extract_variable() end,
         { buffer = bufnr, desc = "Extract variable" })
       vim.keymap.set("v", ",ev", function() jdtls.extract_variable(true) end,
@@ -155,10 +158,42 @@ local function setup_jdtls()
         { buffer = bufnr, desc = "Extract constant" })
       vim.keymap.set("v", ",em", function() jdtls.extract_method(true) end,
         { buffer = bufnr, desc = "Extract method" })
+      vim.keymap.set("n", ",ef", function() jdtls.extract_field() end,
+        { buffer = bufnr, desc = "Extract field" })
+
+      -- Generate (Alt+Insert in IntelliJ)
+      vim.keymap.set("n", ",gc", function() jdtls.generate_constructors() end,
+        { buffer = bufnr, desc = "Generate constructor" })
+      vim.keymap.set("n", ",gg", function() jdtls.generate_getters_and_setters() end,
+        { buffer = bufnr, desc = "Generate getters/setters" })
+      vim.keymap.set("n", ",gt", function() jdtls.generate_to_string() end,
+        { buffer = bufnr, desc = "Generate toString()" })
+      vim.keymap.set("n", ",ge", function() jdtls.generate_equals_and_hash_code() end,
+        { buffer = bufnr, desc = "Generate equals/hashCode" })
+      vim.keymap.set("n", ",gd", function() jdtls.generate_delegate_methods() end,
+        { buffer = bufnr, desc = "Generate delegate methods" })
+      vim.keymap.set("n", ",gi", function() jdtls.super_implementation() end,
+        { buffer = bufnr, desc = "Go to super implementation" })
+
+      -- Move
+      vim.keymap.set("n", ",mt", function() jdtls.move_type() end,
+        { buffer = bufnr, desc = "Move type" })
+      vim.keymap.set("n", ",mm", function() jdtls.move_method() end,
+        { buffer = bufnr, desc = "Move method" })
+      vim.keymap.set("n", ",mf", function() jdtls.move_field() end,
+        { buffer = bufnr, desc = "Move field" })
+
+      -- Test
       vim.keymap.set("n", ",t", function() jdtls.test_nearest_method() end,
         { buffer = bufnr, desc = "Test method" })
       vim.keymap.set("n", ",T", function() jdtls.test_class() end,
         { buffer = bufnr, desc = "Test class" })
+
+      -- Tools
+      vim.keymap.set("n", ",jp", function() jdtls.javap() end,
+        { buffer = bufnr, desc = "Show bytecode" })
+      vim.keymap.set("n", ",js", function() jdtls.jshell() end,
+        { buffer = bufnr, desc = "Open JShell" })
 
       -- Setup DAP after jdtls is ready
       jdtls.setup_dap({ hotcodereplace = "auto" })
