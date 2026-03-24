@@ -14,11 +14,16 @@ help: ## Show available commands
 setup: nvim fonts deps lsp java rust bootstrap sync ## Full setup: nvim + fonts + all languages + plugins
 	@echo "✅ Setup complete! Restart your terminal, then open nvim."
 
-pull: ## Pull latest config + sync plugins
+pull: ## Pull latest config + sync plugins (runs setup if needed)
 	@echo "⬇️  Pulling latest config..."
 	@git -C $(NVIM_DIR) pull --rebase
 	@echo ""
-	@$(MAKE) -s sync
+	@if [ ! -d ~/.local/share/nvim/rocks ]; then \
+		echo "🆕 Fresh machine detected — running full setup..."; \
+		$(MAKE) -s setup; \
+	else \
+		$(MAKE) -s sync; \
+	fi
 	@echo "✅ Config updated and plugins synced"
 
 push: ## Commit and push config changes
@@ -31,6 +36,10 @@ push: ## Commit and push config changes
 
 sync: ## Sync plugins from rocks.toml
 	@echo "🔄 Syncing plugins..."
+	@if [ ! -d ~/.local/share/nvim/rocks ]; then \
+		echo "⚠️  rocks.nvim not bootstrapped — running bootstrap first..."; \
+		$(MAKE) -s bootstrap; \
+	fi
 	@nvim --headless -c "Rocks sync" -c "sleep 15" -c "qa!" 2>&1 || true
 	@echo "✅ Plugins synced"
 

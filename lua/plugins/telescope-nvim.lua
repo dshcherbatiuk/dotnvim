@@ -13,7 +13,25 @@ telescope.setup({
       horizontal = {
         prompt_position = "top",
         width = 0.95,
-        preview_width = 0.4,
+        preview_width = 0.55,
+      },
+    },
+  },
+  pickers = {
+    git_status = {
+      git_icons = {
+        added = " ",
+        changed = " ",
+        copied = " ",
+        deleted = " ",
+        renamed = " ",
+        unmerged = " ",
+        untracked = " ",
+      },
+      layout_config = {
+        horizontal = {
+          preview_width = 0.6,
+        },
       },
     },
   },

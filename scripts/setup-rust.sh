@@ -17,13 +17,17 @@ else
   echo "✅ rustup installed"
 fi
 
-# Rust toolchain
+# Rust toolchain — ensure stable is installed and up to date
 echo "🔍 Checking Rust toolchain..."
 if command -v rustc &>/dev/null; then
   echo "✅ rustc $(rustc --version | awk '{print $2}')"
+  echo "📦 Updating stable toolchain..."
+  rustup update stable
+  echo "✅ Rust stable updated to $(rustc --version | awk '{print $2}')"
 else
   echo "📦 Installing stable toolchain..."
   rustup install stable
+  rustup default stable
   echo "✅ Rust stable installed"
 fi
 
@@ -63,7 +67,7 @@ if command -v cargo-watch &>/dev/null; then
   echo "✅ cargo-watch already installed"
 else
   echo "📦 Installing cargo-watch..."
-  cargo install cargo-watch
+  cargo install --locked cargo-watch
   echo "✅ cargo-watch installed"
 fi
 

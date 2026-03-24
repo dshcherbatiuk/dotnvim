@@ -145,7 +145,7 @@ wk.add({
   { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Log" },
   { "<leader>gd", "<cmd>DiffviewFileHistory %<cr>", desc = "Diff file history" },
   { "<leader>gD", "<cmd>DiffviewOpen HEAD<cr>", desc = "Diff all changes" },
-  { "<leader>gm", "<cmd>DiffviewOpen<cr>", desc = "Merge tool (conflicts)" },
+  { "<leader>gm", function() _G.telescope_conflicts() end, desc = "Merge conflicts (Telescope)" },
   { "<leader>gc", function()
     local base = vim.fn.system("git merge-base HEAD @{upstream} 2>/dev/null"):gsub("%s+", "")
     if base == "" then
@@ -258,6 +258,7 @@ wk.add({
 wk.add({
   { "<S-F6>", vim.lsp.buf.rename, desc = "Rename (Shift+F6)" },
   { "<M-CR>", vim.lsp.buf.code_action, desc = "Code action (Alt+Enter)" },
+  { "<C-.>", vim.lsp.buf.code_action, desc = "Code action (Ctrl+.)" },
   { "<C-S-n>", "<cmd>Telescope find_files<cr>", desc = "Find file (Ctrl+Shift+N)" },
   { "<C-S-f>", "<cmd>Telescope live_grep<cr>", desc = "Find in path (Ctrl+Shift+F)" },
   { "<F12>", vim.lsp.buf.definition, desc = "Go to definition (F12)" },

@@ -12,14 +12,16 @@ if ! command -v brew &>/dev/null; then
   exit 1
 fi
 
-# Check Java
+# Check Java — install if missing
 echo "🔍 Checking Java..."
 if command -v java &>/dev/null; then
   java_version=$(java -version 2>&1 | head -1)
   echo "✅ Java found: $java_version"
 else
-  echo "❌ Java not found. Install with: brew install openjdk"
-  exit 1
+  echo "📦 Installing Java (OpenJDK 21)..."
+  brew install openjdk@21
+  sudo ln -sfn "$(brew --prefix openjdk@21)/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-21.jdk
+  echo "✅ Java 21 installed"
 fi
 
 # jdtls — Eclipse Java Language Server

@@ -55,7 +55,7 @@ local function setup_jdtls()
   end
 
   local config = {
-    cmd = { "jdtls", "--jvm-arg=-Xmx4g", "-data", workspace_dir },
+    cmd = { "jdtls", "--jvm-arg=-Xmx6g", "--jvm-arg=-XX:+UseG1GC", "-data", workspace_dir },
     root_dir = root_dir,
     capabilities = capabilities,
     init_options = {
@@ -219,8 +219,32 @@ local function setup_jdtls()
   jdtls.start_or_attach(config)
 end
 
+-- Auto-restart jdtls on crash: clean workspace and retry once
+local jdtls_retried = {}
+
+vim.api.nvim_create_autocmd("LspDetach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "jdtls" and client.is_stopped() then
+      local root = client.config.root_dir or ""
+      local project_name = vim.fn.fnamemodify(root, ":p:h:t")
+      local ws = vim.fn.stdpath("cache") .. "/jdtls-workspace/" .. project_name
+
+      if not jdtls_retried[project_name] then
+        jdtls_retried[project_name] = true
+        vim.notify("🔄 jdtls crashed — cleaning workspace and restarting...", vim.log.levels.WARN)
+        vim.fn.delete(ws, "rf")
+        vim.defer_fn(setup_jdtls, 2000)
+      end
+    end
+  end,
+})
+
 -- Auto-start jdtls for Java files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
-  callback = setup_jdtls,
+  callback = function()
+    jdtls_retried = {}
+    setup_jdtls()
+  end,
 })
