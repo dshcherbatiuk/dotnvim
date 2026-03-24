@@ -17,13 +17,19 @@ else
   echo "✅ rustup installed"
 fi
 
-# Rust toolchain — ensure stable is installed and up to date
+RUST_MIN_VERSION="1.88"
+
+# Rust toolchain — ensure stable >= $RUST_MIN_VERSION
 echo "🔍 Checking Rust toolchain..."
 if command -v rustc &>/dev/null; then
-  echo "✅ rustc $(rustc --version | awk '{print $2}')"
-  echo "📦 Updating stable toolchain..."
-  rustup update stable
-  echo "✅ Rust stable updated to $(rustc --version | awk '{print $2}')"
+  current=$(rustc --version | awk '{print $2}')
+  echo "✅ rustc $current"
+  # Compare versions: update if below minimum
+  if printf '%s\n%s\n' "$RUST_MIN_VERSION" "$current" | sort -V | head -1 | grep -q "^$current$" && [ "$current" != "$RUST_MIN_VERSION" ]; then
+    echo "⚠️  Rust $current < $RUST_MIN_VERSION — updating..."
+    rustup update stable
+    echo "✅ Rust stable updated to $(rustc --version | awk '{print $2}')"
+  fi
 else
   echo "📦 Installing stable toolchain..."
   rustup install stable

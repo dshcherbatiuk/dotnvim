@@ -12,17 +12,24 @@ if ! command -v brew &>/dev/null; then
   exit 1
 fi
 
-# Check Java — install if missing
-echo "🔍 Checking Java..."
-if command -v java &>/dev/null; then
-  java_version=$(java -version 2>&1 | head -1)
-  echo "✅ Java found: $java_version"
-else
-  echo "📦 Installing Java (OpenJDK 21)..."
-  brew install openjdk@21
-  sudo ln -sfn "$(brew --prefix openjdk@21)/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-21.jdk
-  echo "✅ Java 21 installed"
-fi
+# Required Java versions (jdtls needs 21+, projects may need 25)
+JAVA_VERSIONS=(21 25)
+
+for ver in "${JAVA_VERSIONS[@]}"; do
+  echo "🔍 Checking Java $ver..."
+  if /usr/libexec/java_home -v "$ver" &>/dev/null; then
+    echo "✅ Java $ver found"
+  else
+    echo "📦 Installing Java (OpenJDK $ver)..."
+    brew install "openjdk@$ver"
+    sudo ln -sfn "$(brew --prefix "openjdk@$ver")/libexec/openjdk.jdk" "/Library/Java/JavaVirtualMachines/openjdk-$ver.jdk"
+    echo "✅ Java $ver installed"
+  fi
+done
+
+# Default to Java 25
+export JAVA_HOME=$(/usr/libexec/java_home -v 25 2>/dev/null || /usr/libexec/java_home -v 21)
+echo "✅ JAVA_HOME → $JAVA_HOME"
 
 # jdtls — Eclipse Java Language Server
 echo "🔍 Checking jdtls..."

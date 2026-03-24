@@ -90,6 +90,21 @@ local function setup_jdtls()
         },
         configuration = {
           updateBuildConfiguration = "automatic",
+          runtimes = (function()
+            local runtimes = {}
+            local java_home_cmd = "/usr/libexec/java_home"
+            for _, ver in ipairs({ { name = "JavaSE-21", version = "21" }, { name = "JavaSE-25", version = "25" } }) do
+              local path = vim.fn.system(java_home_cmd .. " -v " .. ver.version .. " 2>/dev/null"):gsub("%s+$", "")
+              if vim.v.shell_error == 0 and path ~= "" then
+                table.insert(runtimes, {
+                  name = ver.name,
+                  path = path,
+                  default = ver.version == "25",
+                })
+              end
+            end
+            return #runtimes > 0 and runtimes or nil
+          end)(),
         },
         autobuild = { enabled = true },
         eclipse = {
