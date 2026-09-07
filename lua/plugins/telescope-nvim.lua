@@ -35,4 +35,14 @@ telescope.setup({
       },
     },
   },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
+    },
+  },
 })
+
+-- Route vim.ui.select through Telescope so pickers owned by other plugins —
+-- LSP code actions, Claude model selection — match the rest of the config
+-- instead of falling back to Neovim's plain numbered prompt.
+pcall(telescope.load_extension, "ui-select")

@@ -31,7 +31,7 @@ Authoritative list is `rocks.toml` — this grouping is for orientation only.
 - **Debugging** — nvim-dap, nvim-dap-ui, nvim-nio
 - **Git** — gitsigns.nvim, diffview.nvim
 - **AI** — claudecode.nvim (Claude Code MCP bridge; keymaps in `which-key.lua` under `+ai`)
-- **Navigation** — telescope.nvim, project.nvim, oil.nvim
+- **Navigation** — telescope.nvim, telescope-ui-select (routes `vim.ui.select` through Telescope), project.nvim, oil.nvim
 - **Editing** — nvim-treesitter, which-key.nvim
 - **Markdown & diagrams** — neorg, mkdnflow, render-markdown.nvim, image.nvim, diagram.nvim
 - **UI** — doom-one, lualine.nvim, alpha-nvim, nvim-web-devicons

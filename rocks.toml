@@ -40,6 +40,9 @@ git = "NTBBloodbath/doom-one.nvim"
 git = "nvim-telescope/telescope.nvim"
 rev = "0.1.8"
 
+[plugins.telescope-ui-select-nvim]
+git = "nvim-telescope/telescope-ui-select.nvim"
+
 [config]
 plugins_dir = "plugins/"
 auto_setup = false
