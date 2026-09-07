@@ -11,6 +11,17 @@ vim.opt.cursorline = true
 -- Sync yank with system clipboard
 vim.opt.clipboard = "unnamedplus"
 
+-- Reload buffers edited outside Neovim (e.g. by Claude Code).
+-- autoread only re-reads when Neovim happens to check; checktime forces it.
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "TermClose", "TermLeave" }, {
+  callback = function()
+    if vim.bo.buftype == "" and vim.fn.mode() ~= "c" then
+      vim.cmd.checktime()
+    end
+  end,
+})
+
 -- Treesitter-based code folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
