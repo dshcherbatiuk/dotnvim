@@ -5,14 +5,14 @@ end
 
 diagram.setup({
   events = {
-    render_buffer = { "BufWinEnter", "InsertLeave" },
+    render_buffer = { "BufWinEnter", "BufWritePost" },
     clear_buffer = { "BufLeave" },
   },
   renderer_options = {
     mermaid = {
       theme = "dark",
       background = "transparent",
-      scale = 3,
+      scale = 2,
     },
   },
 })
