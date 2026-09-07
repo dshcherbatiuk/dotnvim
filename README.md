@@ -62,6 +62,25 @@ Leader: `Space` | Local leader: `,`
 | `SPC g r` | Reset hunk |
 | `SPC g t` | Toggle line blame |
 
+### AI (Claude Code)
+
+Neovim registers itself as an IDE over the Claude Code MCP protocol, so proposed
+edits open as diffs to accept or reject instead of landing on disk unreviewed.
+
+| Key | Action |
+|-----|--------|
+| `SPC a c` | Toggle Claude |
+| `SPC a f` | Focus Claude |
+| `SPC a r` | Resume session |
+| `SPC a C` | Continue session |
+| `SPC a m` | Select model |
+| `SPC a b` | Add buffer to context |
+| `SPC a s` | Send selection (normal + visual) |
+| `SPC a a` | Accept diff |
+| `SPC a d` | Deny diff |
+
+Run `:checkhealth claudecode` to verify the WebSocket server and lock file.
+
 ### IntelliJ-style
 
 | Key | Action |
