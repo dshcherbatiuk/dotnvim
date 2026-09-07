@@ -191,6 +191,7 @@ wk.add({
   { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
   { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
   { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select model" },
   { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add buffer to context" },
   { "<leader>as", "<cmd>ClaudeCodeSend<cr>", desc = "Send selection", mode = { "n", "v" } },
   { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
