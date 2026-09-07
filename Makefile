@@ -82,7 +82,7 @@ deps: ## Install external deps (ImageMagick, mermaid-cli)
 lsp: ## Install language servers (yaml, bash, json, python, rust, etc.)
 	@./scripts/setup-lsp.sh
 
-java: ## Install Java IDE tooling (jdtls, maven, gradle, formatter)
+java: ## Install Java IDE tooling (jdtls, maven, gradle, lombok)
 	@./scripts/setup-java.sh
 
 rust: ## Install Rust IDE tooling (rust-analyzer, clippy, rustfmt)

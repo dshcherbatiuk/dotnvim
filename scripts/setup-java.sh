@@ -61,16 +61,6 @@ else
   echo "✅ Gradle installed"
 fi
 
-# google-java-format — formatter
-echo "🔍 Checking google-java-format..."
-if command -v google-java-format &>/dev/null; then
-  echo "✅ google-java-format already installed"
-else
-  echo "📦 Installing google-java-format..."
-  brew install google-java-format
-  echo "✅ google-java-format installed"
-fi
-
 # java-debug adapter
 JAVA_DEBUG_DIR="$HOME/.local/share/nvim/java-debug"
 echo "🔍 Checking java-debug..."
@@ -118,5 +108,4 @@ echo ""
 echo "  jdtls            — Java Language Server (LSP)"
 echo "  mvn              — Maven build tool"
 echo "  gradle           — Gradle build tool"
-echo "  google-java-format — Code formatter"
 echo "  lombok.jar       — Annotation processor agent for jdtls"
