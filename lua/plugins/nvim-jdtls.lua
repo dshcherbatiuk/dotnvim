@@ -9,12 +9,12 @@ end
 -- Find debug adapter bundles
 local function get_debug_bundles()
   local bundles = {}
-  local java_debug_jar = vim.fn.glob(
+  local java_debug_jars = vim.fn.glob(
     vim.fn.expand("~/.local/share/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
-    true
+    true, true
   )
-  if java_debug_jar ~= "" then
-    table.insert(bundles, java_debug_jar)
+  for _, jar in ipairs(java_debug_jars or {}) do
+    table.insert(bundles, jar)
   end
 
   local java_test_jars = vim.fn.glob(
