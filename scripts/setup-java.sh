@@ -100,6 +100,18 @@ else
   echo "✅ vscode-java-test installed"
 fi
 
+# Lombok — annotation processor agent for jdtls
+LOMBOK_JAR="$HOME/.local/share/nvim/lombok/lombok.jar"
+echo "🔍 Checking Lombok..."
+if [ -f "$LOMBOK_JAR" ]; then
+  echo "✅ Lombok already installed"
+else
+  echo "📦 Installing Lombok..."
+  mkdir -p "$(dirname "$LOMBOK_JAR")"
+  curl -fsSL https://projectlombok.org/downloads/lombok.jar -o "$LOMBOK_JAR"
+  echo "✅ Lombok installed"
+fi
+
 echo ""
 echo "🎉 Java IDE tooling ready!"
 echo ""
@@ -107,3 +119,4 @@ echo "  jdtls            — Java Language Server (LSP)"
 echo "  mvn              — Maven build tool"
 echo "  gradle           — Gradle build tool"
 echo "  google-java-format — Code formatter"
+echo "  lombok.jar       — Annotation processor agent for jdtls"

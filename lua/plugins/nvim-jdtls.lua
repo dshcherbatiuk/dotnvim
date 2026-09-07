@@ -54,8 +54,22 @@ local function setup_jdtls()
     return
   end
 
+  local jdtls_cmd = { "jdtls", "--jvm-arg=-Xmx6g", "--jvm-arg=-XX:+UseG1GC" }
+
+  -- Lombok generates methods at compile time. Without the agent loaded into the
+  -- language server's own JVM, jdtls cannot resolve them and reports phantom
+  -- errors on every @Data / @Slf4j / @RequiredArgsConstructor class.
+  local lombok_jar = vim.fn.expand("~/.local/share/nvim/lombok/lombok.jar")
+  if vim.uv.fs_stat(lombok_jar) then
+    table.insert(jdtls_cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
+  else
+    vim.notify("⚠️ Lombok jar missing — run: make java", vim.log.levels.WARN)
+  end
+
+  vim.list_extend(jdtls_cmd, { "-data", workspace_dir })
+
   local config = {
-    cmd = { "jdtls", "--jvm-arg=-Xmx6g", "--jvm-arg=-XX:+UseG1GC", "-data", workspace_dir },
+    cmd = jdtls_cmd,
     root_dir = root_dir,
     capabilities = capabilities,
     init_options = {
