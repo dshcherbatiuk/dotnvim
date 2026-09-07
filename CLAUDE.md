@@ -25,7 +25,18 @@ rocks.nvim uses luarocks instead of git-based plugin managers. Key differences:
 
 ## Current Plugins
 
-neorg, telescope, nvim-lspconfig, nvim-treesitter, doom-one, lualine, alpha-nvim, which-key, oil.nvim, nvim-web-devicons, mkdnflow, render-markdown.nvim, image.nvim, diagram.nvim
+Authoritative list is `rocks.toml` — this grouping is for orientation only.
+
+- **LSP & completion** — nvim-lspconfig, nvim-jdtls (Java), nvim-cmp with cmp-nvim-lsp / cmp-buffer / cmp-path
+- **Debugging** — nvim-dap, nvim-dap-ui, nvim-nio
+- **Git** — gitsigns.nvim, diffview.nvim
+- **AI** — claudecode.nvim (Claude Code MCP bridge; keymaps in `which-key.lua` under `+ai`)
+- **Navigation** — telescope.nvim, project.nvim, oil.nvim
+- **Editing** — nvim-treesitter, which-key.nvim
+- **Markdown & diagrams** — neorg, mkdnflow, render-markdown.nvim, image.nvim, diagram.nvim
+- **UI** — doom-one, lualine.nvim, alpha-nvim, nvim-web-devicons
+
+Language tooling is installed outside the plugin manager by `make java` / `make rust` / `make lsp`; see `scripts/`.
 
 ## Adding Plugin Configuration
 
