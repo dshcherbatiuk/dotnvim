@@ -57,6 +57,7 @@ _G.open_project = function()
         if selection then
           vim.cmd("cd " .. selection.value)
           vim.cmd("Oil " .. selection.value)
+          vim.cmd("ClaudeAutostart")
         end
       end)
       map("i", "<S-y>", function()
@@ -118,6 +119,7 @@ _G.find_new_project = function()
                 if selection then
                   vim.cmd("cd " .. selection.value)
                   vim.cmd("Oil " .. selection.value)
+                  vim.cmd("ClaudeAutostart")
                 end
               end)
               map("i", "<S-y>", function()
