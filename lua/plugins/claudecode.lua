@@ -12,5 +12,7 @@ end
 claudecode.setup({
   terminal = {
     provider = "native",
+    -- Narrow the Claude split while a diff is open so the diff gets the room.
+    diff_split_width_percentage = 0.20,
   },
 })
