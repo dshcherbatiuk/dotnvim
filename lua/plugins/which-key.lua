@@ -3,6 +3,10 @@ if not ok then
   return
 end
 
+local function recent_files()
+  require("telescope.builtin").oldfiles({ prompt_title = "Recent Files" })
+end
+
 wk.setup({
   preset = "modern",
   delay = 200,
@@ -18,7 +22,7 @@ wk.add({
   -- +file
   { "<leader>f", group = "file" },
   { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find file" },
-  { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+  { "<leader>fr", recent_files, desc = "Recent Files" },
   { "<leader>fs", "<cmd>w<cr>", desc = "Save file" },
   { "<leader>fS", "<cmd>wa<cr>", desc = "Save all" },
   { "<leader>fn", "<cmd>enew<cr>", desc = "New file" },
@@ -246,7 +250,8 @@ wk.add({
   { "<leader>,", "<cmd>Telescope buffers<cr>", desc = "Switch buffer" },
   { "<leader>.", "<cmd>Telescope find_files<cr>", desc = "Find file" },
   { "<leader>q", "<cmd>qa<cr>", desc = "Quit" },
-  { "<leader><", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+  { "<leader><", "<cmd>Telescope buffers<cr>", desc = "Switch buffer" },
+  { "<leader>e", recent_files, desc = "Recent Files" },
 
   -- +help
   { "<leader>h", group = "help" },
