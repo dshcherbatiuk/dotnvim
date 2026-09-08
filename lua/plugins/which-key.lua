@@ -198,6 +198,8 @@ wk.add({
   { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select model" },
   { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add buffer to context" },
   { "<leader>as", "<cmd>ClaudeCodeSend<cr>", desc = "Send selection", mode = { "n", "v" } },
+  { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+  { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 
   -- +code
   { "<leader>c", group = "code" },

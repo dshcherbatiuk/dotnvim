@@ -64,10 +64,10 @@ Leader: `Space` | Local leader: `,`
 
 ### AI (Claude Code)
 
-Neovim registers itself as an IDE over the Claude Code MCP protocol, giving Claude
-the current file, selection, and diagnostics. The `openDiff` capability is
-deliberately withheld, so Claude approves edits at its own prompt and review stays
-with diffview and gitsigns.
+Neovim registers itself as an IDE over the Claude Code MCP protocol, so proposed
+edits open as a diff to accept or reject instead of landing on disk unreviewed.
+The diff uses a unified layout — one buffer with inline `+`/`-` markers rather
+than side-by-side panels.
 
 | Key | Action |
 |-----|--------|
@@ -78,6 +78,8 @@ with diffview and gitsigns.
 | `SPC a m` | Select model |
 | `SPC a b` | Add buffer to context |
 | `SPC a s` | Send selection (normal + visual) |
+| `SPC a a` | Accept diff |
+| `SPC a d` | Deny diff |
 
 Run `:checkhealth claudecode` to verify the WebSocket server and lock file.
 
