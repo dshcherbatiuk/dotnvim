@@ -73,6 +73,13 @@ vim.api.nvim_create_autocmd("FileType", {
       if not vim.api.nvim_buf_is_valid(bufnr) then return end
       if vim.bo[bufnr].filetype ~= "markdown" then return end
 
+      -- foldmethod is window-scoped, and the window current now need not be the
+      -- one the FileType autocmd ran in — a diff split opened in between carries
+      -- the global treesitter foldexpr, under which :fold raises E350.
+      if vim.wo.foldmethod ~= "manual" then
+        vim.wo.foldmethod = "manual"
+      end
+
       local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
       local fold_start = nil
       for i, line in ipairs(lines) do
@@ -81,7 +88,7 @@ vim.api.nvim_create_autocmd("FileType", {
         elseif fold_start and line:match("^```$") then
           -- Fold content + closing fence, keep opening fence visible for image anchor
           if i > fold_start + 1 then
-            vim.cmd((fold_start + 1) .. "," .. i .. "fold")
+            pcall(vim.cmd, (fold_start + 1) .. "," .. i .. "fold")
           end
           fold_start = nil
         end
