@@ -7,6 +7,17 @@ if not ok then
   return
 end
 
+-- Withhold the openDiff capability. Unadvertised, Claude approves edits at its
+-- own prompt instead of opening split panels, leaving review to diffview and
+-- gitsigns. register_all is wrapped rather than the table edited once, because
+-- tools are registered each time the server starts, not at setup.
+local tools = require("claudecode.tools")
+local register_all = tools.register_all
+tools.register_all = function(...)
+  register_all(...)
+  tools.tools["openDiff"] = nil
+end
+
 claudecode.setup({
   terminal = {
     provider = require("plugins.claudecode-fullwindow"),

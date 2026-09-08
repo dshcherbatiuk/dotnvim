@@ -198,14 +198,13 @@ wk.add({
   { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select model" },
   { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add buffer to context" },
   { "<leader>as", "<cmd>ClaudeCodeSend<cr>", desc = "Send selection", mode = { "n", "v" } },
-  { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-  { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 
   -- +code
   { "<leader>c", group = "code" },
   { "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename" },
   { "<leader>cf", function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
+  { "<leader>cj", "<cmd>JdtlsStart<cr>", desc = "Start jdtls (Java)" },
   { "<leader>cd", vim.diagnostic.open_float, desc = "Line diagnostics" },
   { "<leader>cD", "<cmd>Telescope diagnostics<cr>", desc = "All diagnostics" },
   { "<leader>ce", "<cmd>Telescope diagnostics severity=ERROR<cr>", desc = "Errors only" },

@@ -64,8 +64,10 @@ Leader: `Space` | Local leader: `,`
 
 ### AI (Claude Code)
 
-Neovim registers itself as an IDE over the Claude Code MCP protocol, so proposed
-edits open as diffs to accept or reject instead of landing on disk unreviewed.
+Neovim registers itself as an IDE over the Claude Code MCP protocol, giving Claude
+the current file, selection, and diagnostics. The `openDiff` capability is
+deliberately withheld, so Claude approves edits at its own prompt and review stays
+with diffview and gitsigns.
 
 | Key | Action |
 |-----|--------|
@@ -76,8 +78,6 @@ edits open as diffs to accept or reject instead of landing on disk unreviewed.
 | `SPC a m` | Select model |
 | `SPC a b` | Add buffer to context |
 | `SPC a s` | Send selection (normal + visual) |
-| `SPC a a` | Accept diff |
-| `SPC a d` | Deny diff |
 
 Run `:checkhealth claudecode` to verify the WebSocket server and lock file.
 
@@ -112,7 +112,10 @@ Run `:checkhealth claudecode` to verify the WebSocket server and lock file.
 
 ### Language-specific (localleader `,`)
 
-**Java:** `, o` organize imports | `, t` test method | `, T` test class | `, ev/ec/em` extract variable/constant/method
+**Java:** `SPC c j` start jdtls | `, o` organize imports | `, t` test method | `, T` test class | `, ev/ec/em` extract variable/constant/method
+
+jdtls is opt-in — each project root spawns its own JVM, so it starts only when
+asked. Opening a Java file attaches to a server already running for that project.
 
 **Rust:** `, r` cargo run | `, b` build | `, t` test | `, c` clippy | `, f` format | `, d` docs | `, w` watch
 
