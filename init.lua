@@ -86,7 +86,7 @@ vim.keymap.set("n", "_", "<C-o>", { desc = "Jump back" })
 -- Terminal mode forwards every key to the process, so leader mappings are dead
 -- inside Claude. This returns to normal mode without touching Esc, which Claude
 -- Code uses to interrupt a running response.
-vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Use Telescope for / search in buffer
 vim.keymap.set("n", "/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
