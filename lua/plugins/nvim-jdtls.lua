@@ -54,7 +54,7 @@ local function setup_jdtls()
     return
   end
 
-  local jdtls_cmd = { "jdtls", "--jvm-arg=-Xmx6g", "--jvm-arg=-XX:+UseG1GC" }
+  local jdtls_cmd = { "jdtls", "--jvm-arg=-Xmx2g", "--jvm-arg=-XX:+UseG1GC" }
 
   -- Lombok generates methods at compile time. Without the agent loaded into the
   -- language server's own JVM, jdtls cannot resolve them and reports phantom
@@ -248,32 +248,43 @@ local function setup_jdtls()
   jdtls.start_or_attach(config)
 end
 
--- Auto-restart jdtls on crash: clean workspace and retry once
-local jdtls_retried = {}
-
+-- Report a crash rather than recovering from it. The previous handler wiped the
+-- workspace and restarted, which forces a full re-index — the most expensive
+-- thing jdtls does. Its "retry once" guard was cleared on every Java FileType,
+-- so a server that kept crashing re-indexed the repository in a loop at 100% CPU.
 vim.api.nvim_create_autocmd("LspDetach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client and client.name == "jdtls" and client.is_stopped() then
-      local root = client.config.root_dir or ""
-      local project_name = vim.fn.fnamemodify(root, ":p:h:t")
-      local ws = vim.fn.stdpath("cache") .. "/jdtls-workspace/" .. project_name
-
-      if not jdtls_retried[project_name] then
-        jdtls_retried[project_name] = true
-        vim.notify("🔄 jdtls crashed — cleaning workspace and restarting...", vim.log.levels.WARN)
-        vim.fn.delete(ws, "rf")
-        vim.defer_fn(setup_jdtls, 2000)
-      end
+      vim.notify("💥 jdtls stopped — ,R restarts it with a clean workspace", vim.log.levels.WARN)
     end
   end,
 })
 
--- Auto-start jdtls for Java files
+---@param path string Absolute path of a Java file
+---@return boolean true when a jdtls server is already serving this file's project
+local function server_running_for(path)
+  for _, client in ipairs(vim.lsp.get_clients({ name = "jdtls" })) do
+    local root = client.config.root_dir
+    if root and path:sub(1, #root) == root then
+      return true
+    end
+  end
+  return false
+end
+
+-- Attach to a server already serving this project, but never start one. Each
+-- project root gets its own JVM, so autostarting meant a repo you merely browsed
+-- cost as much as one you worked in.
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
-  callback = function()
-    jdtls_retried = {}
-    setup_jdtls()
+  callback = function(args)
+    if server_running_for(vim.api.nvim_buf_get_name(args.buf)) then
+      setup_jdtls()
+    end
   end,
+})
+
+vim.api.nvim_create_user_command("JdtlsStart", setup_jdtls, {
+  desc = "Start jdtls for this project",
 })
