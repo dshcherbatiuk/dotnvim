@@ -94,5 +94,29 @@ vim.keymap.set("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<Tab>", "<C-w>w", { desc = "Next window" })
 vim.keymap.set("n", "<S-Tab>", "<C-w>W", { desc = "Previous window" })
 
+-- A terminal program draws its own status line, so Neovim's stacks on top of it.
+-- Hide ours while terminal mode has the keyboard, and restore it on the way out.
+local restore_status = nil
+
+vim.api.nvim_create_autocmd("TermEnter", {
+  callback = function()
+    if restore_status == nil then
+      restore_status = { laststatus = vim.o.laststatus, showmode = vim.o.showmode }
+    end
+    vim.o.laststatus = 0
+    vim.o.showmode = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("TermLeave", {
+  callback = function()
+    if restore_status then
+      vim.o.laststatus = restore_status.laststatus
+      vim.o.showmode = restore_status.showmode
+      restore_status = nil
+    end
+  end,
+})
+
 -- Use Telescope for / search in buffer
 vim.keymap.set("n", "/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
