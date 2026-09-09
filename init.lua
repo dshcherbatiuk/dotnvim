@@ -88,5 +88,11 @@ vim.keymap.set("n", "_", "<C-o>", { desc = "Jump back" })
 -- Code uses to interrupt a running response.
 vim.keymap.set("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Cycle windows. Terminals send the same code for <Tab> and <C-i>, so jumplist
+-- forward is lost unless the terminal reports them separately; mkdnflow keeps
+-- <Tab> for link navigation inside markdown buffers.
+vim.keymap.set("n", "<Tab>", "<C-w>w", { desc = "Next window" })
+vim.keymap.set("n", "<S-Tab>", "<C-w>W", { desc = "Previous window" })
+
 -- Use Telescope for / search in buffer
 vim.keymap.set("n", "/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search buffer" })
